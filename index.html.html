@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yaddlapalli Hari Babu — AI Data Specialist</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0d0d0d;
+    --cream: #f5f0e8;
+    --gold: #c9a84c;
+    --rust: #b84a2e;
+    --muted: #6b6560;
+    --border: #d8d0c4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* Grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.5;
+  }
+
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem 4rem;
+  }
+
+  /* Header */
+  header {
+    padding: 4rem 0 2rem;
+    border-bottom: 2px solid var(--ink);
+    position: relative;
+    animation: fadeDown 0.8s ease both;
+  }
+
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .name-block h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
+  .name-block h1 span {
+    display: block;
+    color: var(--rust);
+  }
+
+  .title-tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 0.3rem 0.8rem;
+    margin-top: 0.8rem;
+  }
+
+  .contact-block {
+    text-align: right;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 2;
+  }
+
+  .contact-block a {
+    color: var(--rust);
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  .contact-block a:hover { opacity: 0.7; }
+
+  /* Decorative rule */
+  .rule {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+  .rule::before, .rule::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .rule span {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  /* Sections */
+  section {
+    margin-top: 3rem;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  section:nth-child(2) { animation-delay: 0.1s; }
+  section:nth-child(3) { animation-delay: 0.2s; }
+  section:nth-child(4) { animation-delay: 0.3s; }
+  section:nth-child(5) { animation-delay: 0.4s; }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* Summary */
+  .summary p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #2a2520;
+    max-width: 72ch;
+    border-left: 3px solid var(--gold);
+    padding-left: 1.2rem;
+  }
+
+  /* Competencies */
+  .competencies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.8rem;
+  }
+
+  .comp-tag {
+    background: var(--ink);
+    color: var(--cream);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    padding: 0.6rem 1rem;
+    letter-spacing: 0.04em;
+    transition: background 0.2s, color 0.2s;
+    cursor: default;
+  }
+
+  .comp-tag:hover {
+    background: var(--rust);
+    color: #fff;
+  }
+
+  /* Experience */
+  .exp-item {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 2rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .exp-item:last-child { border-bottom: none; }
+
+  .exp-meta {
+    padding-top: 0.15rem;
+  }
+
+  .exp-company {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .exp-period {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--muted);
+    margin-top: 0.3rem;
+  }
+
+  .exp-role {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--rust);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-top: 0.3rem;
+  }
+
+  .exp-bullets {
+    list-style: none;
+    padding: 0;
+  }
+
+  .exp-bullets li {
+    font-size: 0.9rem;
+    padding: 0.3rem 0;
+    padding-left: 1.2rem;
+    position: relative;
+    color: #2a2520;
+  }
+
+  .exp-bullets li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* Skills */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .skill-group h4 {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 0.5rem;
+  }
+
+  .skill-group p {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* Education */
+  .edu-item {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .edu-item:last-child { border-bottom: none; }
+
+  .edu-degree {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  .edu-school {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-top: 0.2rem;
+  }
+
+  .edu-grade {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--gold);
+    white-space: nowrap;
+  }
+
+  /* Languages */
+  .lang-row {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .lang-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .lang-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  .lang-level {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .lang-dots {
+    display: flex;
+    gap: 4px;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--border);
+  }
+
+  .dot.filled { background: var(--rust); }
+
+  /* Certs */
+  .cert-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .cert-item {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .cert-item::before {
+    content: '✦';
+    color: var(--gold);
+    font-size: 0.6rem;
+  }
+
+  /* Footer */
+  footer {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 2px solid var(--ink);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  footer p {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+
+  .availability {
+    background: var(--rust);
+    color: #fff;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem;
+  }
+
+  /* Animations */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .exp-item { grid-template-columns: 1fr; gap: 0.8rem; }
+    .contact-block { text-align: left; }
+    .header-top { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="header-top">
+      <div class="name-block">
+        <h1>Yaddlapalli<span>Hari Babu</span></h1>
+        <div class="title-tag">AI Data Specialist &nbsp;·&nbsp; B.Tech CSE</div>
+      </div>
+      <div class="contact-block">
+        <div>+91 93473 91216</div>
+        <div><a href="mailto:yaddlapalliharibabu@gmail.com">yaddlapalliharibabu@gmail.com</a></div>
+        <div>Andhra Pradesh, India</div>
+        <div><a href="https://linkedin.com/in/yaddlapalliharibabu" target="_blank">linkedin.com/in/yaddlapalliharibabu</a></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Summary -->
+  <section class="summary">
+    <div class="section-label">Profile</div>
+    <p>Detail-oriented B.Tech Computer Science graduate with hands-on experience in data operations, HR analytics, and production reporting. Proficient in Python, MS Excel, and Power BI. Seeking to leverage strong language skills and data expertise as an AI Data Specialist — supporting high-quality AI training datasets including text annotation, translation quality review, and linguistic data validation in Telugu and English.</p>
+  </section>
+
+  <!-- Competencies -->
+  <section>
+    <div class="section-label">Core Competencies</div>
+    <div class="competencies-grid">
+      <div class="comp-tag">Telugu–English Data Annotation</div>
+      <div class="comp-tag">Text Classification & Labeling</div>
+      <div class="comp-tag">Quality Review & Validation</div>
+      <div class="comp-tag">Python & Data Handling</div>
+      <div class="comp-tag">Excel Reporting & Pivot Tables</div>
+      <div class="comp-tag">Power BI Dashboard Design</div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section>
+    <div class="section-label">Professional Experience</div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-company">Nippon Express<br>(Amazon Logistics)</div>
+        <div class="exp-role">HR Associate</div>
+        <div class="exp-period">2022 – 2023</div>
+      </div>
+      <ul class="exp-bullets">
+        <li>Maintained and validated employee attendance records ensuring 100% data accuracy across Excel-based HR systems.</li>
+        <li>Quality-checked large volumes of employee data, applying rigorous error-detection practices transferable to AI annotation workflows.</li>
+        <li>Generated structured HR reports and KPI dashboards, handling repetitive, detail-intensive data tasks.</li>
+        <li>Coordinated cross-functional communication in Telugu and English, supporting bilingual documentation and reporting.</li>
+        <li>Managed recruitment data — screening, shortlisting, and tracking candidate pipelines in spreadsheets.</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-company">Kia Automotive Plant</div>
+        <div class="exp-role">Production Mgmt. Associate</div>
+        <div class="exp-period">2021 – 2022</div>
+      </div>
+      <ul class="exp-bullets">
+        <li>Monitored and logged production data in real-time, ensuring integrity across inventory and warehouse systems.</li>
+        <li>Prepared daily operational reports using MS Excel — pivot tables, charts, and KPI summaries.</li>
+        <li>Tracked production metrics and flagged anomalies, demonstrating systematic attention to detail in high-volume environments.</li>
+        <li>Coordinated with Telugu-speaking teams on shop floor, facilitating bilingual documentation and instructions.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section>
+    <div class="section-label">Projects & AI-Relevant Work</div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-company">Sales Data Analysis</div>
+        <div class="exp-role">Personal Project</div>
+        <div class="exp-period">2023</div>
+      </div>
+      <ul class="exp-bullets">
+        <li>Built advanced Pivot Tables and KPI dashboards in Excel to analyse multi-dimensional sales data.</li>
+        <li>Applied data cleaning and normalisation techniques — critical for preparing AI training datasets.</li>
+        <li>Produced structured reports demonstrating high attention to data quality.</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-company">Power BI Business Dashboard</div>
+        <div class="exp-role">Personal Project</div>
+        <div class="exp-period">2023</div>
+      </div>
+      <ul class="exp-bullets">
+        <li>Designed interactive dashboards with drill-down capabilities for regional performance analysis.</li>
+        <li>Integrated multiple data sources and created calculated DAX measures to surface actionable insights.</li>
+        <li>Organised and visualised large datasets — relevant to AI data tracking and quality metrics.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section>
+    <div class="section-label">Technical Skills</div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h4>Programming & Data</h4>
+        <p>Python (data handling, file I/O, basic scripting), MS Excel (VLOOKUP, Pivot Tables, Charts, Data Cleaning)</p>
+      </div>
+      <div class="skill-group">
+        <h4>BI & Reporting</h4>
+        <p>Power BI (Dashboards, KPIs, DAX measures), MS Office Suite</p>
+      </div>
+      <div class="skill-group">
+        <h4>AI Data Competencies</h4>
+        <p>Text annotation, data labelling, quality assurance, structured data entry, pattern recognition</p>
+      </div>
+      <div class="skill-group">
+        <h4>Communication</h4>
+        <p>Team leadership, bilingual documentation (Telugu/English), cross-functional reporting</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Languages -->
+  <section>
+    <div class="section-label">Languages</div>
+    <div class="lang-row">
+      <div class="lang-item">
+        <div class="lang-name">Telugu</div>
+        <div class="lang-dots">
+          <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div>
+        </div>
+        <div class="lang-level">Native</div>
+      </div>
+      <div class="lang-item">
+        <div class="lang-name">English</div>
+        <div class="lang-dots">
+          <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div>
+        </div>
+        <div class="lang-level">Professional</div>
+      </div>
+      <div class="lang-item">
+        <div class="lang-name">Hindi</div>
+        <div class="lang-dots">
+          <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div>
+        </div>
+        <div class="lang-level">Conversational</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education -->
+  <section>
+    <div class="section-label">Education</div>
+
+    <div class="edu-item">
+      <div>
+        <div class="edu-degree">B.Tech — Computer Science Engineering</div>
+        <div class="edu-school">Sanskrithi School of Engineering, Puttaparthi, Andhra Pradesh</div>
+      </div>
+      <div class="edu-grade">CGPA 7.2 / 10</div>
+    </div>
+
+    <div class="edu-item">
+      <div>
+        <div class="edu-degree">Intermediate — MPC</div>
+        <div class="edu-school">Pragathi Junior College, Andhra Pradesh</div>
+      </div>
+      <div class="edu-grade">CGPA 7.0 / 10</div>
+    </div>
+
+    <div class="edu-item">
+      <div>
+        <div class="edu-degree">SSC — Secondary School Certificate</div>
+        <div class="edu-school">Bhashyam English Medium School, Andhra Pradesh</div>
+      </div>
+      <div class="edu-grade">CGPA 9.2 / 10 ✦ Distinction</div>
+    </div>
+  </section>
+
+  <!-- Certifications -->
+  <section>
+    <div class="section-label">Certifications</div>
+    <div class="cert-list">
+      <div class="cert-item">edX Professional Certificate — Communication Skills & Teamwork</div>
+      <div class="cert-item">EF SET English Certificate — Professional English Proficiency</div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Yaddlapalli Hari Babu &nbsp;·&nbsp; Available Part-Time (10+ hrs/week)</p>
+    <div class="availability">Open to AI Data Projects</div>
+  </footer>
+
+</div>
+</body>
+</html>
